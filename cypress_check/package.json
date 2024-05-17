@@ -6,12 +6,12 @@
     "mochawesome-report-generator": "^6.2.0"
   },
   "scripts": {
-    "test:win": "npm run cleanup:win && mocha",
+      "test:win": "npm run cleanup:win && mocha",
     "cleanup-report:win": "if exist mochawesome-report (rmdir /s /q mochawesome-report)",
     "cleanup-json:win": "if exist Consolidated_Report.json (del /q Consolidated_Report.json)",
     "cleanup-results:win": "if exist test-results (rmdir /s /q test-results)",
     "cleanup:win": "npm run cleanup-report:win && npm run cleanup-json:win && npm run cleanup-results:win",
-    "posttest:win": "npm run merge-json && npm run generate-report",
+    "posttest:win": "npm run merge-json:win && npm run generate-report",
     "merge-json:win": "npx mochawesome-merge \"test-results/results-json/*.json\" > Consolidated_Report.json",
     "generate-report:win": "npx marge Consolidated_Report.json",
     "cypress-test:win": "npm run cleanup:win && npx cypress run --reporter mochawesome && npm run posttest:win",
@@ -22,7 +22,7 @@
     "cleanup-json:linux": "if [ -f Consolidated_Report.json ]; then rm -f Consolidated_Report.json; fi",
     "cleanup-results:linux": "if [ -d test-results ]; then rm -rf test-results; fi",
     "cleanup:linux": "npm run cleanup-report:linux && npm run cleanup-json:linux && npm run cleanup-results:linux",
-    "posttest:linux": "npm run merge-json && npm run generate-report",
+    "posttest:linux": "npm run merge-json:linux && npm run generate-report",
     "merge-json:linux": "npx mochawesome-merge \"test-results/results-json/*.json\" > Consolidated_Report.json",
     "generate-report:linux": "npx marge Consolidated_Report.json",
     "cypress-test:linux": "npm run cleanup:linux && npx cypress run --reporter mochawesome && npm run posttest:linux",
