@@ -1,0 +1,33 @@
+name: Cypress Build and Test
+
+on:
+  push:
+    branches:
+      - master  # Adjust the branch name as needed
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest  # Choose the appropriate runner
+
+    steps:
+      - name: Delete Existing Directory
+        run: |
+          if [ -d "cypress_check" ]; then
+            rm -rf cypress_check
+            echo "Deleted existing cypress_check directory"
+          else
+            echo "Directory cypress_check does not exist"
+          fi
+
+      - name: Clone Repository
+        uses: actions/checkout@v2
+
+      - name: Setup
+        run: |
+          cd cypress_check
+          npm install
+
+      - name: Test Execution
+        run: |
+          cd cypress_check
+          npm run cypress:test
