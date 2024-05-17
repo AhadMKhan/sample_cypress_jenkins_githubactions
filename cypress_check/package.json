@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "cypress": "^13.8.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0"
+  },
+  "scripts": {
+    "test": "npm run cleanup && mocha",
+    "cleanup:report": "if exist mochawesome-report (rmdir /s /q mochawesome-report)",
+    "cleanup:json": "if exist Consolidated_Report.json (del /q Consolidated_Report.json)",
+    "cleanup:results": "if exist test-results (rmdir /s /q test-results)",
+    "cleanup": "npm run cleanup:report && npm run cleanup:json && npm run cleanup:results",
+    "posttest": "npm run merge-json && npm run generate-report",
+    "merge-json": "npx mochawesome-merge \"test-results/results-json/*.json\" > Consolidated_Report.json",
+    "generate-report": "npx marge Consolidated_Report.json",
+    "cypress:test": "npm run cleanup && npx cypress run --reporter mochawesome && npm run posttest",
+    "test-run": "npx cypress run --headed --browser edge"
+  }
+}
