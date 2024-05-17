@@ -30,4 +30,4 @@ jobs:
       - name: Test Execution
         run: |
           cd cypress_check
-          npm run cypress:test
+          npm run cypress-test:linux
